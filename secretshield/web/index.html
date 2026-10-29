@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101a25">
+  <meta name="description" content="SecretShield scans your repository for exposed secrets, vulnerable dependencies and common security issues.">
+  <title>SecretShield · Security overview</title>
+  <link rel="icon" href="/shield.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script defer src="/app.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#overview" aria-label="SecretShield home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" fill="none"><path d="M20 3.5 33.5 8v10.3c0 8.5-5.2 14.5-13.5 18.2C11.7 32.8 6.5 26.8 6.5 18.3V8L20 3.5Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="m14 20 4 4 8.5-9" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="brand-copy"><strong>secret<span>shield</span></strong><small>SECURITY, MADE CLEAR</small></span>
+      </a>
+
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="primary-nav">
+        <button class="nav-item active" data-scroll="overview" type="button"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"/></svg><span>Overview</span></button>
+        <button class="nav-item" data-scroll="scan-panel" type="button"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5M10.8 7.5v6.6M7.5 10.8h6.6"/></svg><span>Scan repository</span><span class="nav-indicator"></span></button>
+        <button class="nav-item" data-scroll="findings-panel" type="button"><svg viewBox="0 0 24 24"><path d="M12 3.2 21 19a1.2 1.2 0 0 1-1 1.8H4A1.2 1.2 0 0 1 3 19l9-15.8Z"/><path d="M12 9v4.5M12 17.2h.01"/></svg><span>Findings</span><span class="nav-count" id="nav-count">6</span></button>
+        <button class="nav-item" data-action="integrations" type="button"><svg viewBox="0 0 24 24"><path d="M8.3 9.2 5.8 6.7a3.1 3.1 0 0 0-4.4 4.4l3 3a3.1 3.1 0 0 0 4.4 0l2-2M15.7 14.8l2.5 2.5a3.1 3.1 0 0 0 4.4-4.4l-3-3a3.1 3.1 0 0 0-4.4 0l-2 2"/><path d="m8.5 15.5 7-7"/></svg><span>CI / CD setup</span></button>
+      </nav>
+
+      <div class="sidebar-divider"></div>
+      <div class="workspace-label repo-heading">YOUR REPOSITORY</div>
+      <div class="repo-card" id="repo-card">
+        <span class="repo-avatar">O</span>
+        <span class="repo-copy"><strong id="repo-name">orchard-api</strong><small id="repo-meta">Sample repository</small></span>
+        <span class="repo-state" aria-label="Sample data"></span>
+      </div>
+
+      <div class="sidebar-spacer"></div>
+      <div class="side-tip">
+        <span class="tip-icon"><svg viewBox="0 0 24 24"><path d="M12 3.2a7.3 7.3 0 0 0-4.5 13v2.3h9v-2.3A7.3 7.3 0 0 0 12 3.2Z"/><path d="M9.5 21h5M9 10.5l2 2 4-4"/></svg></span>
+        <strong>Small steps add up.</strong>
+        <p>Fix the high-impact issues first. Your future self will thank you.</p>
+        <button type="button" class="tip-link" data-scroll="findings-panel">Review findings <span aria-hidden="true">↗</span></button>
+      </div>
+      <div class="sidebar-foot"><span class="local-dot"></span> Scans run on this computer</div>
+    </aside>
+
+    <main class="main-content" id="overview">
+      <header class="topbar">
+        <div class="breadcrumbs"><span>Workspace</span><span class="crumb-slash">/</span><strong>Security overview</strong></div>
+        <div class="topbar-actions">
+          <span class="connection-state"><span class="local-dot"></span> Local workspace</span>
+          <button class="icon-button" type="button" title="About SecretShield" aria-label="About SecretShield" data-action="about"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></button>
+          <span class="user-avatar" aria-label="SecretShield workspace">S</span>
+        </div>
+      </header>
+
+      <div class="content-wrap">
+        <section class="page-heading">
+          <div>
+            <div class="eyebrow"><span class="eyebrow-line"></span> YOUR SECURITY, AT A GLANCE</div>
+            <h1>A clearer view of your security.</h1>
+            <p class="page-subtitle">Spot what needs attention, understand why, and make your next move.</p>
+          </div>
+          <button class="button button-secondary desktop-scan" type="button" data-scroll="scan-panel"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5M10.8 7.5v6.6M7.5 10.8h6.6"/></svg> New scan</button>
+        </section>
+
+        <div class="demo-banner" id="demo-banner" role="status">
+          <span class="demo-spark"><svg viewBox="0 0 24 24"><path d="m12 3 1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7L12 3Z"/><path d="m19 16 .8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8L19 16Z"/></svg></span>
+          <span><strong>You’re looking at a sample scan.</strong> Scan a repository to see your own results here.</span>
+          <button type="button" class="banner-link" data-scroll="scan-panel">Run your first scan <span aria-hidden="true">→</span></button>
+          <button type="button" class="banner-close" aria-label="Dismiss sample notice" data-action="dismiss-demo">×</button>
+        </div>
+
+        <section class="scan-card" id="scan-panel" aria-labelledby="scan-title">
+          <div class="scan-art" aria-hidden="true">
+            <div class="scan-orbit orbit-one"></div><div class="scan-orbit orbit-two"></div>
+            <div class="shield-illustration"><svg viewBox="0 0 84 92" fill="none"><path d="M42 5 73 15v23c0 20-12 34-31 43C23 72 11 58 11 38V15L42 5Z" fill="#e6ffbc" stroke="#9dde70" stroke-width="2"/><path d="m28 44 9 9 20-22" stroke="#395c35" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <span class="art-spark spark-a">✳</span><span class="art-spark spark-b">✦</span><span class="art-dot"></span>
+          </div>
+          <div class="scan-content">
+            <div class="scan-heading-line"><span class="scan-label">A GOOD PLACE TO START</span><span class="scan-status"><span class="local-dot"></span> Private by default</span></div>
+            <h2 id="scan-title">Give a folder a quick check.</h2>
+            <p class="scan-description">Scan a Git repository or any folder for exposed credentials, dependency issues and risky code patterns.</p>
+            <form class="scan-form" id="scan-form">
+              <label class="sr-only" for="repository-path">Folder path</label>
+              <span class="path-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 7.5h6l2 2H20a1.5 1.5 0 0 1 1.5 1.5v7A1.5 1.5 0 0 1 20 19.5H4A1.5 1.5 0 0 1 2.5 18V9a1.5 1.5 0 0 1 1-1.5Z"/><path d="M2.8 11.5h18.4"/></svg></span>
+              <input id="repository-path" name="path" type="text" autocomplete="off" spellcheck="false" placeholder="Paste a folder path, e.g.  C:\\Projects\\my-app" required>
+              <button class="button button-primary" type="submit" id="scan-button"><span class="button-label">Scan repository</span><svg class="button-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+            </form>
+            <div class="scope-selector" role="group" aria-labelledby="scope-label">
+              <span class="scope-label" id="scope-label">Scan scope</span>
+              <label class="scope-choice"><input type="radio" name="scan-scope" value="repository" checked><span>Git repository</span></label>
+              <label class="scope-choice"><input type="radio" name="scan-scope" value="folder"><span>Any folder</span></label>
+              <span class="scope-hint" id="scope-hint">Choose a folder inside a Git repository.</span>
+            </div>
+            <div class="privacy-note"><svg viewBox="0 0 24 24"><rect x="4.5" y="10" width="15" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></svg><span>Source files stay here. Dependency checks share package names and versions with OSV.</span><label class="dependency-toggle"><input type="checkbox" id="dependency-toggle" checked><span>Check dependencies</span></label></div>
+            <div class="scan-progress" id="scan-progress" aria-live="polite" hidden></div>
+          </div>
+        </section>
+
+        <section class="metrics-grid" aria-label="Scan summary">
+          <article class="metric-card metric-red"><div class="metric-top"><span>Exposed secrets</span><span class="metric-icon"><svg viewBox="0 0 24 24"><circle cx="8" cy="15" r="4.5"/><path d="m11.5 11.5 8-8M16 7l2 2M13 10l2 2"/></svg></span></div><div class="metric-value" id="metric-secrets">2</div><div class="metric-foot"><span class="metric-note" id="metric-secrets-note">Rotate these first</span><span class="metric-severity-dot red"></span></div></article>
+          <article class="metric-card metric-amber"><div class="metric-top"><span>Dependency alerts</span><span class="metric-icon"><svg viewBox="0 0 24 24"><path d="m12 3 9 16H3l9-16Z"/><path d="M12 9v4M12 16h.01"/></svg></span></div><div class="metric-value" id="metric-dependencies">1</div><div class="metric-foot"><span class="metric-note" id="metric-dependencies-note">Known advisories found</span><span class="metric-severity-dot amber"></span></div></article>
+          <article class="metric-card metric-violet"><div class="metric-top"><span>Code concerns</span><span class="metric-icon"><svg viewBox="0 0 24 24"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></span></div><div class="metric-value" id="metric-code">3</div><div class="metric-foot"><span class="metric-note" id="metric-code-note">A few things to review</span><span class="metric-severity-dot violet"></span></div></article>
+          <article class="metric-card metric-green"><div class="metric-top"><span>Files checked</span><span class="metric-icon"><svg viewBox="0 0 24 24"><path d="M6 3.5h8l4 4V20a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1Z"/><path d="M14 3.5v5h5M8 13h8M8 17h5"/></svg></span></div><div class="metric-value" id="metric-files">248</div><div class="metric-foot"><span class="metric-note" id="metric-files-note">Across this repository</span><span class="metric-severity-dot green"></span></div></article>
+        </section>
+
+        <section class="insights-row" aria-label="Scan overview">
+          <article class="breakdown-card">
+            <div class="section-card-heading"><div><span class="section-kicker">THE BIG PICTURE</span><h2>What needs a closer look</h2></div><span class="total-pill"><span id="total-findings">6</span> findings</span></div>
+            <div class="severity-meter" role="img" aria-label="Finding severity breakdown"><span class="meter-critical" id="meter-critical" style="width:33.34%"></span><span class="meter-high" id="meter-high" style="width:16.66%"></span><span class="meter-medium" id="meter-medium" style="width:33.34%"></span><span class="meter-low" id="meter-low" style="width:16.66%"></span></div>
+            <div class="severity-legend">
+              <button type="button" data-filter-severity="critical"><span class="legend-dot critical-dot"></span><span>Critical</span><strong id="count-critical">2</strong></button>
+              <button type="button" data-filter-severity="high"><span class="legend-dot high-dot"></span><span>High</span><strong id="count-high">1</strong></button>
+              <button type="button" data-filter-severity="medium"><span class="legend-dot medium-dot"></span><span>Medium</span><strong id="count-medium">2</strong></button>
+              <button type="button" data-filter-severity="low"><span class="legend-dot low-dot"></span><span>Low</span><strong id="count-low">1</strong></button>
+            </div>
+          </article>
+          <article class="last-scan-card">
+            <div class="last-scan-icon"><svg viewBox="0 0 24 24"><path d="M12 3.2 21 8v8l-9 4.8L3 16V8l9-4.8Z"/><path d="m3.5 8.3 8.5 4.6 8.5-4.6M12 12.9v7.5M7.5 5.6l9 4.8"/></svg></div>
+            <div class="last-scan-copy"><span class="section-kicker">LAST SCAN</span><strong id="last-scan-title">Sample scan</strong><span id="last-scan-meta">248 files · 18 dependencies</span></div>
+            <span class="scan-time" id="scan-time">Preview</span>
+          </article>
+        </section>
+
+        <section class="findings-section" id="findings-panel" aria-labelledby="findings-title">
+          <div class="findings-heading">
+            <div><div class="section-kicker">A SHORT, PRACTICAL TO-DO LIST</div><h2 id="findings-title">Findings <span class="heading-count" id="heading-count">6</span></h2><p class="findings-subtitle">A little context for each issue, with a clear next step.</p></div>
+            <div class="findings-actions">
+              <div class="export-menu" id="export-menu"><button type="button" class="button button-secondary export-button" id="export-button"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg> Export report <svg class="chevron" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"/></svg></button><div class="export-popover" id="export-popover" hidden><button type="button" data-export="json">Download JSON</button><button type="button" data-export="sarif">Download SARIF</button></div></div>
+              <button type="button" class="button button-text" id="clear-filter" hidden>Clear filters</button>
+            </div>
+          </div>
+          <div class="findings-toolbar">
+            <div class="filter-tabs" role="group" aria-label="Filter findings by severity">
+              <button type="button" class="filter-tab selected" data-filter-severity="all">All <span id="tab-all-count">6</span></button>
+              <button type="button" class="filter-tab" data-filter-severity="critical">Critical <span id="tab-critical-count">2</span></button>
+              <button type="button" class="filter-tab" data-filter-severity="high">High <span id="tab-high-count">1</span></button>
+              <button type="button" class="filter-tab" data-filter-severity="medium">Medium <span id="tab-medium-count">2</span></button>
+              <button type="button" class="filter-tab" data-filter-severity="low">Low <span id="tab-low-count">1</span></button>
+            </div>
+            <label class="search-box"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg><input type="search" id="finding-search" placeholder="Find an issue…" aria-label="Search findings"></label>
+          </div>
+          <div class="finding-list" id="finding-list"></div>
+          <div class="findings-footer"><span id="results-caption">Showing 6 of 6 findings</span><span class="redaction-note"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8.5 10V7a3.5 3.5 0 0 1 7 0v3M12 14v3"/></svg> Secret matches stay out of reports</span></div>
+        </section>
+
+        <footer class="page-footer"><span>Made for the people shipping the code.</span><span>SecretShield <span class="footer-divider">·</span> Open source security, with a human touch.</span></footer>
+      </div>
+    </main>
+  </div>
+
+  <dialog class="info-dialog" id="info-dialog" aria-labelledby="dialog-title"><button type="button" class="dialog-close" aria-label="Close" data-action="close-dialog">×</button><div class="dialog-icon"><svg viewBox="0 0 40 40"><path d="M20 3.5 33.5 8v10.3c0 8.5-5.2 14.5-13.5 18.2C11.7 32.8 6.5 26.8 6.5 18.3V8L20 3.5Z"/><path d="m14 20 4 4 8.5-9"/></svg></div><div id="dialog-content"></div></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "secretshield"
+version = "1.0.0"
+description = "A friendly, local-first security scanner for repositories and CI pipelines."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "SecretShield contributors" }]
+keywords = ["security", "devsecops", "secrets", "vulnerability-scanner", "sarif"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Security",
+]
+
+dependencies = []
+
+[project.scripts]
+secretshield = "secretshield.cli:main"
+
+[tool.setuptools]
+packages = ["secretshield"]

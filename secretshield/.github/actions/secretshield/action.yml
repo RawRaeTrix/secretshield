@@ -1,0 +1,40 @@
+name: SecretShield repository scan
+description: Scan a repository for exposed credentials, risky code patterns and known dependency advisories.
+inputs:
+  path:
+    description: Repository directory to scan, relative to the workspace or absolute.
+    required: false
+    default: .
+  fail-on:
+    description: Minimum finding severity that fails the job (critical, high, medium, low, none).
+    required: false
+    default: high
+runs:
+  using: composite
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v7
+      with:
+        python-version: "3.11"
+    - name: Install SecretShield
+      shell: bash
+      env:
+        SECRET_SHIELD_ACTION_PATH: ${{ github.action_path }}
+      run: python -m pip install "$SECRET_SHIELD_ACTION_PATH"
+    - name: Scan repository
+      id: scan
+      shell: bash
+      continue-on-error: true
+      env:
+        SECRET_SHIELD_SCAN_PATH: ${{ inputs.path }}
+        SECRET_SHIELD_FAIL_ON: ${{ inputs.fail-on }}
+      run: secretshield "$SECRET_SHIELD_SCAN_PATH" --format sarif --output "$RUNNER_TEMP/secretshield.sarif" --fail-on "$SECRET_SHIELD_FAIL_ON"
+    - name: Upload SARIF to code scanning
+      if: always()
+      uses: github/codeql-action/upload-sarif@v4
+      with:
+        sarif_file: ${{ runner.temp }}/secretshield.sarif
+    - name: Apply scan policy
+      if: steps.scan.outcome == 'failure'
+      shell: bash
+      run: exit 1
